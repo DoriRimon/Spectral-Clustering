@@ -36,8 +36,8 @@ def QR_Iterations(A, epsilon = 0.0001): #doesn't converge all the way
         Sum += time.time() - t1
         Abar = R.dot(Q)
         
-        diff_arr = abs(diagonal(Qbar))- abs(diagonal(Qbar.dot(Q)))
-        if (abs(diff_arr) <= epsilon).all():
+        diff_mat = Qbar- Qbar.dot(Q)
+        if (abs(diff_mat) <= epsilon).all():
             return (Abar,Qbar)
 
         Qbar = Qbar.dot(Q)
