@@ -5,7 +5,7 @@ import sklearn.datasets
 import Laplacian
 import time
 import math #used only for ceil, check if it's fine
-
+#check- should we work with copies everywhere?
 def QR(A):
 
     n = A.shape[0]
