@@ -14,5 +14,5 @@ def build(c):
 
 @task
 def run(c, k, n, Random=True):
-    # build(c) TODO - solve import problem
+    build(c)
     main(k, n, Random)
