@@ -116,7 +116,9 @@ def main(k, n, Random):
 	:param Random: boolean, the Random variable described in the assignment
 
 	"""
+	# import is done here inorder to prevent calling the kmeans module (from tasks.py) before build.
 	import kmeans
+
 	k, n = int(k), int(n)
 	print_max_capacity()
 
@@ -142,7 +144,7 @@ def main(k, n, Random):
 
 	kmeans_observations = X
 
-	spectral_res = kmeans.main(spectral_observations, k, k, n)  # TODO - think about the right parameters
+	spectral_res = kmeans.main(spectral_observations, k, n, k)
 	kmeans_res = kmeans.main(kmeans_observations, k, n, d)
 
 	build_clusters_text_file(k, spectral_res, kmeans_res)

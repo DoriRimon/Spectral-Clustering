@@ -9,7 +9,6 @@ static void initialize();
 static void clusters_assignments();
 static void clustering();
 static void update_centroids();
-static void print_centroids();
 static void deallocate_imatrix();
 static void deallocate_dmatrix();
 static PyObject* kmeans();
@@ -77,7 +76,7 @@ static PyObject* m(double** obs, double** cents, int** cltrs) {
 
 
     /* deallocating matrices */
-    // deallocate_dmatrix(observations,N); TODO - maybe should deallocate?
+    // deallocate_dmatrix(observations,N); // TODO - maybe should deallocate?
     deallocate_dmatrix(centroids,k);
     deallocate_imatrix(clusters,k);
 
@@ -172,20 +171,6 @@ static double norm(double *v1, double *v2, int length) {
         sum = sum + (v2[i] - v1[i]) * (v2[i] - v1[i]);
     }
     return sum;
-}
-
-static void print_centroids(double **centroids) {
-    int i;
-    for (i = 0; i < k; i++) {
-        int j;
-        for (j = 0; j < d; j++) {
-            printf("%f", centroids[i][j]);
-            if (j < d - 1) {
-                printf(",");
-            }
-        }
-        printf("\n");
-    }
 }
 
 /* --------------- Python Stuff --------------- */
