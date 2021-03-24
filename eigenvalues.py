@@ -4,7 +4,6 @@ import numpy as np
 import sklearn.datasets
 import laplacian
 import time
-import math
 
 """
 Desc:   This file handles all the work related to computing the eigenvalues and eigenvectors

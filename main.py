@@ -1,5 +1,4 @@
 import spectral
-import kmeans
 import random
 from sklearn.datasets import make_blobs
 
@@ -63,7 +62,7 @@ def build_data_text_file():
 	with open("data.txt", "w") as data:
 		for i in range(len(centers)):
 			point = X[i]
-			data.write(','.join(point) + ',' + centers[i] + '\n')
+			data.write(','.join([str(num) for num in point]) + ',' + str(centers[i]) + '\n')
 
 
 def build_clusters_text_file(k, spectral_res, kmeans_res):
@@ -117,6 +116,8 @@ def main(k, n, Random):
 	:param Random: boolean, the Random variable described in the assignment
 
 	"""
+	import kmeans
+	k, n = int(k), int(n)
 	print_max_capacity()
 
 	d = random.randint(2, 3)
