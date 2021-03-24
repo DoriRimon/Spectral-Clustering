@@ -67,7 +67,7 @@ static void vector_dassign(double *u, double *v, int size) {
     }
 }
 
-static int m(double** obs, double** cents, int** cltrs) {
+static PyObject* m(double** obs, double** cents, int** cltrs) {
     double **observations = obs;
     double **centroids = cents;
     int **clusters = cltrs;

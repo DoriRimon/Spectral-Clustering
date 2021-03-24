@@ -21,6 +21,7 @@ Note:   Throughout the documentation we used names that were defined in the assi
 # TODO - check all the shapes in the documentation
 # TODO - document C code properly
 # TODO - handle existing files when creating data files
+# TODO - circular imports (tasks -> main -> mykmeansssp)
 
 # TODO - find actual (K, n) of the maximum capacity
 
