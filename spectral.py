@@ -87,8 +87,8 @@ def main(X, k=None):
 
 	Lnorm = laplacian.Lnorm_matrix(X)
 	A, Q = eigenvalues.QR_Iterations(Lnorm)
-
 	eigen_values = eigenvalues_list(A)
+
 	if k is None:
 		k = eigengap([eigen_values[i][0] for i in range(n)])
 

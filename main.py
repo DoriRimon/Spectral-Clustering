@@ -17,8 +17,10 @@ Note:   Throughout the documentation we used names that were defined in the assi
 # TODO - need bottlenecks to C
 # TODO - remove unrelated imports
 # TODO - remove debug code
+# TODO - remove unnecessary prints
 # TODO - check all the shapes in the documentation
 # TODO - document C code properly
+# TODO - handle existing files when creating data files
 
 # TODO - find actual (K, n) of the maximum capacity
 
@@ -68,7 +70,21 @@ def build_clusters_text_file(k, spectral_res, kmeans_res):
 	Builds the clusters.txt file
 
 	"""
-	pass
+	n = len(spectral_res)
+	spectral_indexes = {i: [] for i in range(k)}
+	kmeans_indexes = {i: [] for i in range(k)}
+	for i in range(n):
+		spectral_i = spectral_res[i][-1]
+		kmeans_i = kmeans_res[i][-1]
+		spectral_indexes[spectral_i].append(i)
+		kmeans_indexes[kmeans_i].append(i)
+
+	with open("clusters.txt", "w") as clusters:
+		clusters.write(str(k) + '\n')
+		for i in range(k):
+			clusters.write(','.join(spectral_indexes[i]) + '\n')
+		for i in range(k):
+			clusters.write(','.join(kmeans_indexes[i]) + '\n')
 
 
 def build_clusters_pdf_file(K, k, n, d, spectral_res, kmeans_res):

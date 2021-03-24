@@ -1,15 +1,8 @@
-/*
- * kmeans.c
- *
- *  Created on: 25.2.21
- *  Author: Dori Rimon & Yonatan Lin
- */
 #define PY_SSIZE_T_CLEAN
+#include <Python.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include <assert.h>
-#include <Python.h>
 
 static double norm();
 static void initialize();
@@ -80,39 +73,15 @@ static int m(double** obs, double** cents, int** cltrs) {
     int **clusters = cltrs;
 
     clustering(observations, clusters, centroids);
-    /*print_centroids(centroids);*/
-    /*FILE* clusters_file = clusters_file(clusters); /*creates the textual representations of the data without k in the first line*/
-    /* deallocating matrices **/
-    deallocate_dmatrix(observations,N);
+    PyObject *res = Py_BuildValue("O", observations); // TODO - maybe N instead of O?
+
+
+    /* deallocating matrices */
+    // deallocate_dmatrix(observations,N); TODO - maybe should deallocate?
     deallocate_dmatrix(centroids,k);
     deallocate_imatrix(clusters,k);
-    fclose(clusters_file); /* deallocation needed?*/
-    return 0;
-}
 
-static FILE* clusters_file(double** clusters) /*currently not in use*/
-{
-	int i;
-	int j;
-	FILE* clusters_file = fopen("Clusters_rep.txt","w");
-	/*each row in clusters is a cluster, we put 1 for the columns representing the observations which are in this cluster*/
-	for(i = 0 ; i < N  ; i++)
-	{
-		if(i > 0)
-		{
-			putc(clusters_file,"\n");
-		}
-
-		for(j = 0 ; j < N ; j++)
-		{
-			if(clusters[i][j] == 1) /*obs j is in cluster i*/
-			{
-				putc(clusters_file,j);
-				putc(clusters_file,",");
-			}
-		}
-	}
-	return clusters_file;
+    return res;
 }
 
 static void initialize(int* init_centroids, double** centroids, double** observations, int** clusters)
@@ -194,7 +163,6 @@ static void clustering(double **observations, int **clusters, double **centroids
         update_centroids(centroids, observations);
         iter++;
     }
-
 }
 
 static double norm(double *v1, double *v2, int length) {
@@ -236,7 +204,6 @@ static PyObject* kmeans(PyObject *self, PyObject *args) {
     int* init_centroids;
     double** centroids;
     int** clusters;
-    double*** res;
 
     if(!PyArg_ParseTuple(args, "O:kmeans", &_list)) {
         return NULL;
@@ -271,37 +238,10 @@ static PyObject* kmeans(PyObject *self, PyObject *args) {
     }
 
     initialize(init_centroids, centroids, observations, clusters);
-    m(observations, centroids, clusters); /*create the observation, centroids and clusters inplace*/
-    /*now need to return a python tuple of observations,clusters*/
-
-
     free(init_centroids);
-    Py_RETURN_NONE;
+
+    return m(observations, centroids, clusters);
 }
-
-
-static PyObject* lst_to_pylst(double* lst, int len) /*convert C list to python list*/
-{
-	PyObject *_list;
-	int i;
-	for(i = 0 ; i < len ; i++)
-	{
-		PyList_Insert(_list,i,lst[i]);
-	}
-	return PyObject*;
-}
-
-static PyObject* matrix_to_pymatrix(double** mat, int rows, int columns)
-{
-	PyObject* _matrix;
-	int i;
-	int j;
-	for(i = 0 ; i < rows ; i++)
-	{
-		PyList_Insert()
-	}
-}
-
 
 /*
  * A macro to help us with defining the methods
@@ -327,4 +267,3 @@ PyInit_mykmeanssp(void)
 {
     return PyModule_Create(&_moduledef);
 }
-
