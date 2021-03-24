@@ -70,10 +70,15 @@ static PyObject* m(double** obs, double** cents, int** cltrs) {
     double **observations = obs;
     double **centroids = cents;
     int **clusters = cltrs;
+    PyObject* res;
+    Py_size_t i;
 
     clustering(observations, clusters, centroids);
-    PyObject *res = Py_BuildValue("O", observations); // TODO - maybe N instead of O?
 
+    res = PyList_New(d+1);
+    for (i = 0; i < d+1; i++) {
+        PyList_SET_ITEM(res, i, PyInt_FromLong(observations[i]));
+    }
 
     /* deallocating matrices */
     // deallocate_dmatrix(observations,N); // TODO - maybe should deallocate?
@@ -180,7 +185,7 @@ static double norm(double *v1, double *v2, int length) {
 */
 static PyObject* kmeans(PyObject *self, PyObject *args) {
 
-    Py_ssize_t i, j;
+    Py_size_t i, j;
     PyObject *_list;
     PyObject *item;
     PyObject *py_observations;
