@@ -77,7 +77,7 @@ static PyObject* m(double** obs, double** cents, int** cltrs) {
 
     res = PyList_New(d+1);
     for (i = 0; i < d+1; i++) {
-        PyList_SET_ITEM(res, i, PyInt_FromLong(observations[i]));
+        PyList_SET_ITEM(res, i, Py_BuildValue("d", observations[i]));
     }
 
     /* deallocating matrices */

@@ -74,8 +74,8 @@ def build_clusters_text_file(k, spectral_res, kmeans_res):
 	spectral_indexes = {i: [] for i in range(k)}
 	kmeans_indexes = {i: [] for i in range(k)}
 	for i in range(n):
-		spectral_i = spectral_res[i][-1]
-		kmeans_i = kmeans_res[i][-1]
+		spectral_i = int(spectral_res[i][-1])
+		kmeans_i = int(kmeans_res[i][-1])
 		spectral_indexes[spectral_i].append(i)
 		kmeans_indexes[kmeans_i].append(i)
 
