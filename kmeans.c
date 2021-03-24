@@ -71,7 +71,7 @@ static PyObject* m(double** obs, double** cents, int** cltrs) {
     double **centroids = cents;
     int **clusters = cltrs;
     PyObject* res;
-    Py_size_t i;
+    Py_ssize_t i;
 
     clustering(observations, clusters, centroids);
 
@@ -185,7 +185,7 @@ static double norm(double *v1, double *v2, int length) {
 */
 static PyObject* kmeans(PyObject *self, PyObject *args) {
 
-    Py_size_t i, j;
+    Py_ssize_t i, j;
     PyObject *_list;
     PyObject *item;
     PyObject *py_observations;
