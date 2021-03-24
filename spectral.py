@@ -52,11 +52,9 @@ def U_matrix(Q, k, eigen_values):
 
 	"""
 	U = [Q[:, eigen_values[j][1]] for j in range(k)]
-
-	# TODO - what's happening here?
-	# U = np.array(U)
-	# U = transpose(U)
-	return np.array(U)
+	U = np.array(U)
+	U = np.transpose(U)
+	return U
 
 
 def T_matrix(U):

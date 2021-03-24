@@ -144,7 +144,7 @@ def main(k, n, Random):
 
 	kmeans_observations = X
 
-	spectral_res = kmeans.main(spectral_observations, k, n, k)
+	spectral_res = kmeans.main(spectral_observations, k, n, k)  # TODO - send correct params
 	kmeans_res = kmeans.main(kmeans_observations, k, n, d)
 
 	build_clusters_text_file(k, spectral_res, kmeans_res)
