@@ -1,6 +1,11 @@
 import numpy as np
 import mykmeanssp as mk
 
+"""
+Desc:   This is the main file regarding the kmeans algorithm.
+"""
+
+
 MAX_ITER = 300
 
 observations = []

@@ -70,14 +70,18 @@ static PyObject* m(double** obs, double** cents, int** cltrs) {
     double **observations = obs;
     double **centroids = cents;
     int **clusters = cltrs;
-    PyObject* res;
-    Py_ssize_t i;
+    PyObject* res, temp;
+    Py_ssize_t i, j;
 
     clustering(observations, clusters, centroids);
 
-    res = PyList_New(d+1);
-    for (i = 0; i < d+1; i++) {
-        PyList_SET_ITEM(res, i, Py_BuildValue("d", observations[i]));
+    res  = PyList_New(N);
+    for (i = 0; i < N; i++) {
+        temp = PyList_New(d+1);
+        for (j = 0; j < d+1; j++) {
+            PyList_SET_ITEM(temp, j, Py_BuildValue("d", observations[i][j]));
+        }
+        PyList_SET_ITEM(res, i, temp);
     }
 
     /* deallocating matrices */

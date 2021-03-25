@@ -13,7 +13,7 @@ Note:   Throughout the documentation we used names that were defined in the assi
 
 # TODO - error handling
 # TODO - edge values
-# TODO - need bottlenecks to C
+# TODO - move bottlenecks to C
 # TODO - remove unrelated imports
 # TODO - remove debug code
 # TODO - remove unnecessary prints
@@ -144,8 +144,14 @@ def main(k, n, Random):
 
 	kmeans_observations = X
 
+	# print(spectral_observations)
+	# print(kmeans_observations)
+
 	spectral_res = kmeans.main(spectral_observations, k, n, k)  # TODO - send correct params
 	kmeans_res = kmeans.main(kmeans_observations, k, n, d)
+
+	# print(spectral_res)
+	# print(kmeans_res)
 
 	build_clusters_text_file(k, spectral_res, kmeans_res)
 	build_clusters_pdf_file(K, k, n, d, spectral_res, kmeans_res)
