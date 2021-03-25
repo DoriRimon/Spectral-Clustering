@@ -82,9 +82,9 @@ def build_clusters_text_file(k, spectral_res, kmeans_res):
 	with open("clusters.txt", "w") as clusters:
 		clusters.write(str(k) + '\n')
 		for i in range(k):
-			clusters.write(','.join(spectral_indexes[i]) + '\n')
+			clusters.write(','.join([str(num) for num in spectral_indexes[i]]) + '\n')
 		for i in range(k):
-			clusters.write(','.join(kmeans_indexes[i]) + '\n')
+			clusters.write(','.join([str(num) for num in kmeans_indexes[i]]) + '\n')
 
 
 def build_clusters_pdf_file(K, k, n, d, spectral_res, kmeans_res):
