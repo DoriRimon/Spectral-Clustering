@@ -70,7 +70,7 @@ static PyObject* m(double** obs, double** cents, int** cltrs) {
     double **observations = obs;
     double **centroids = cents;
     int **clusters = cltrs;
-    PyObject* res, temp;
+    PyObject* res, *temp;
     Py_ssize_t i, j;
 
     clustering(observations, clusters, centroids);

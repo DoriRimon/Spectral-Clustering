@@ -2,6 +2,8 @@ import spectral
 import random
 from sklearn.datasets import make_blobs
 import os
+import matplotlib.pyplot as plt
+from mpl_toolkits import mplot3d
 
 """
 Desc:   This is the main file - the glue of the program
@@ -22,6 +24,7 @@ Note:   Throughout the documentation we used names that were defined in the assi
 # TODO - document C code properly
 # TODO - handle existing files when creating data files
 # TODO - circular imports (tasks -> main -> mykmeansssp)
+# TODO - maybe create output module?
 
 # TODO - find actual (K, n) of the maximum capacity
 
