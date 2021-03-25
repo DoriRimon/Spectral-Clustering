@@ -1,6 +1,7 @@
 import spectral
 import random
 from sklearn.datasets import make_blobs
+import os
 
 """
 Desc:   This is the main file - the glue of the program
@@ -54,11 +55,24 @@ def create_data(n, d, k, Random):
 	return k
 
 
+def remove_file(filename):
+	"""
+	Helping method to remove files
+
+	:param filename: str, the name of the file
+	"""
+	try:
+		os.remove(filename)
+	except OSError:
+		pass
+
+
 def build_data_text_file():
 	"""
 	Builds the data.txt file
 
 	"""
+	remove_file("data.txt")
 	with open("data.txt", "w") as data:
 		for i in range(len(centers)):
 			point = X[i]
@@ -70,6 +84,7 @@ def build_clusters_text_file(k, spectral_res, kmeans_res):
 	Builds the clusters.txt file
 
 	"""
+	remove_file("clusters.txt")
 	n = len(spectral_res)
 	spectral_indexes = {i: [] for i in range(k)}
 	kmeans_indexes = {i: [] for i in range(k)}
@@ -92,6 +107,7 @@ def build_clusters_pdf_file(K, k, n, d, spectral_res, kmeans_res):
 	Builds the clusters.pdf file
 
 	"""
+	remove_file("clusters.pdf")
 	pass
 
 
