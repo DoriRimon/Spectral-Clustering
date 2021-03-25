@@ -85,7 +85,7 @@ static PyObject* m(double** obs, double** cents, int** cltrs) {
     }
 
     /* deallocating matrices */
-    // deallocate_dmatrix(observations,N); // TODO - maybe should deallocate?
+    deallocate_dmatrix(observations,N);
     deallocate_dmatrix(centroids,k);
     deallocate_imatrix(clusters,k);
 

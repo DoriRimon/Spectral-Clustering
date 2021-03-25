@@ -10,9 +10,6 @@ Desc:   This file handles all the work related to computing the eigenvalues and 
 		of the Lnorm matrix.
 """
 
-# TODO- should we work with copies everywhere?
-
-
 def QR(A):
 	"""
 	The modified Gram-Schmidt algorithm as defined in the assignment
@@ -30,15 +27,14 @@ def QR(A):
 	for i in range(n):
 		Norm[i] = norm(U[:, i])
 		Q[:, i] = U[:, i] / Norm[i]
-		R[i][i + 1:n] = Q[:, i].dot(U[:, i + 1:n])  # TODO - what's happening here?
+		R[i][i + 1:n] = Q[:, i].dot(U[:, i + 1:n])
 		U[:, i + 1:n] = U[:, i + 1:n] - transpose(np.array([Q[:, i]])).dot(np.array([R[i, i + 1:n]]))
 
 	np.fill_diagonal(R, Norm)
 	return Q, R
 
 
-# TODO - how the value of epsilon was decided?
-def QR_Iterations(A, epsilon=0.0001):  # doesn't converge all the way
+def QR_Iterations(A, epsilon=0.0001):
 	"""
 	The QR Iteration algorithm as defined in the assignment
 
@@ -53,14 +49,14 @@ def QR_Iterations(A, epsilon=0.0001):  # doesn't converge all the way
 	Qbar = np.eye(n, dtype=float)
 	Sum = 0
 
-	for i in range(max(n, 10)):  # TODO - why not just n?
+	for i in range(n):
 		t1 = time.time()
 		Q, R = QR(Abar)
 		Sum += time.time() - t1
 		Abar = R.dot(Q)
 
-		diff_mat = Qbar - Qbar.dot(Q)  # TODO - shouldn't there be an absolute value?
-		if (abs(diff_mat) <= epsilon).all():  # TODO - as stated, absolute value in the wrong place
+		diff_mat = abs(Qbar) - abs(Qbar.dot(Q))
+		if (abs(diff_mat) <= epsilon).all():
 			return Abar, Qbar
 
 		Qbar = Qbar.dot(Q)

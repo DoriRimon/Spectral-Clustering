@@ -3,6 +3,8 @@ import mykmeanssp as mk
 
 """
 Desc:   This is the main file regarding the kmeans algorithm.
+
+Ret:    
 """
 
 
@@ -55,7 +57,7 @@ def k_means_pp(k, n):
 		centroids.append(int(u[0]))
 
 
-def main(X, k, n, d):  # TODO - what is returned from mk.kmeans
+def main(X, k, n, d):
 	"""
 	The main function of the kmeans++ algorithm
 

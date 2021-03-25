@@ -68,7 +68,7 @@ def T_matrix(U):
 	n = U.shape[0]
 	k = U.shape[1]
 	T = [[U[i][j] / np.linalg.norm(U[i]) for j in range(k)] for i in range(n)]
-	return np.array(T)  # TODO - why transfer to array?
+	return np.array(T)
 
 
 def main(X, k=None):
