@@ -84,6 +84,7 @@ def main(k, n, Random):
 	print_max_capacity()
 
 	d = random.randint(2, 3)
+	print("d = ", d)
 	K, X, centers = create_data(n, d, k, Random)  # this returned K is the one that was used in the data generation
 
 	files.build_data_text_file(X, centers)

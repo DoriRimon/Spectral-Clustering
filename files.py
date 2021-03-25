@@ -90,3 +90,4 @@ def build_clusters_pdf_file(K, k, n, d, spectral_res, kmeans_res, centers):
 	remove_file("clusters.pdf")
 	print("Jaccard measure for Spectral Clustering: ", jaccard(centers, spectral_res, k))
 	print("Jaccard measure for Kmeans: ", jaccard(centers, kmeans_res, k))
+
