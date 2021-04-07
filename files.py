@@ -1,7 +1,10 @@
 import os
 import matplotlib.pyplot as plt
 from mpl_toolkits import mplot3d
+import matplotlib
+import numpy as np
 from math import comb
+
 
 def remove_file(filename):
 	"""
@@ -87,7 +90,20 @@ def build_clusters_pdf_file(K, k, n, d, spectral_res, kmeans_res, centers):
 	Builds the clusters.pdf file
 
 	"""
+
 	remove_file("clusters.pdf")
 	print("Jaccard measure for Spectral Clustering: ", jaccard(centers, spectral_res, k))
 	print("Jaccard measure for Kmeans: ", jaccard(centers, kmeans_res, k))
 
+	fig = plt.figure()
+	cmap = matplotlib.cm.get_cmap('brg')
+	colors = [cmap(i) for i in np.linspace(0, 1, k)]
+	ax = None
+	if d == 2:
+		ax = fig.add_subplot()
+	elif d == 3:
+		ax = fig.add_subplot(projection='3d')
+	for i in range(n):
+		coordinates = spectral_res[i][:d]
+		ax.scatter(*coordinates, c=colors[spectral_res[i][d]])
+	plt.savefig("clusters.pdf")
