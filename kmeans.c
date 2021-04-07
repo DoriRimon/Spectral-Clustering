@@ -75,7 +75,7 @@ static PyObject* m(double** obs, double** cents, int** cltrs) {
 
     clustering(observations, clusters, centroids);
 
-    res  = PyList_New(N);
+    res = PyList_New(N);
     for (i = 0; i < N; i++) {
         temp = PyList_New(d+1);
         for (j = 0; j < d+1; j++) {

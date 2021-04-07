@@ -22,6 +22,7 @@ Note:   Throughout the documentation we used names that were defined in the assi
 # TODO - check all the shapes in the documentation
 # TODO - document C code properly
 # TODO - maybe create output module?
+# TODO - maybe create folder structure?
 # TODO - no need in global X, centers
 # TODO - create function for converting list of ints to str
 
@@ -84,7 +85,7 @@ def main(k, n, Random):
 	print_max_capacity()
 
 	d = random.randint(2, 3)
-	print("d = ", d)
+	print("d = ", d)  # TODO - remove
 	K, X, centers = create_data(n, d, k, Random)  # this returned K is the one that was used in the data generation
 
 	files.build_data_text_file(X, centers)

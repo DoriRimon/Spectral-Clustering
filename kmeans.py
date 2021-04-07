@@ -65,7 +65,8 @@ def main(X, k, n, d):
 	:param k: int, amount of clusters
 	:param n: int, amount of observations
 	:param d: int, dimension of each observation
-	:return:
+	:return: TODO
+
 	"""
 	global observations
 	observations = X
