@@ -101,9 +101,11 @@ def build_clusters_pdf_file(K, k, n, d, spectral_res, kmeans_res, centers):
 	ax = None
 	if d == 2:
 		ax = fig.add_subplot()
+		for i in range(n):
+			ax.scatter(spectral_res[i][0], spectral_res[i][1], c=colors[spectral_res[i][d]])
 	elif d == 3:
 		ax = fig.add_subplot(projection='3d')
-	for i in range(n):
-		coordinates = [[spectral_res[i][k]] for k in range(d)]
-		ax.scatter(*coordinates, c=colors[spectral_res[i][d]])
+		for i in range(n):
+			ax.scatter(spectral_res[i][0], spectral_res[i][1], spectral_res[i][2], c=colors[spectral_res[i][d]])
+
 	plt.savefig("clusters.pdf")
