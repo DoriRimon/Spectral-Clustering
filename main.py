@@ -25,6 +25,8 @@ Note:   Throughout the documentation we used names that were defined in the assi
 # TODO - maybe create folder structure?
 # TODO - no need in global X, centers
 # TODO - create function for converting list of ints to str
+# TODO - error in kmeans.py when running on Random mode
+# TODO - graphs colors problem (all clusters in the same color)
 
 # TODO - find actual (K, n) of the maximum capacity
 
