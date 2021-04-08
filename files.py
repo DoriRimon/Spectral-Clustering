@@ -106,5 +106,5 @@ def build_clusters_pdf_file(K, k, n, d, spectral_res, kmeans_res, centers):
 
 	for i in range(n):
 		coordinates = [spectral_res[i][k] for k in range(d)]
-		ax.scatter(*coordinates, c=colors[int(spectral_res[i][d])])
+		ax.scatter(*coordinates, color=colors[int(spectral_res[i][d])])
 	plt.savefig("clusters.pdf")
