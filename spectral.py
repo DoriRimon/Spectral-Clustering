@@ -38,6 +38,7 @@ def eigenvalues_list(A):
 	eigen_values = [(A[i][i], i) for i in range(n)]
 	eigen_values = np.array(eigen_values, dtype=dtype)
 	eigen_values = np.sort(eigen_values, order='key')
+	print(eigen_values)
 	return eigen_values
 
 

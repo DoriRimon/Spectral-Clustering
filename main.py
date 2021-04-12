@@ -43,7 +43,7 @@ def create_data(n, d, k, Random):
 	:return: TODO
 
 	"""
-
+	max_k, max_n = 0, 0
 	if d == 2:
 		max_k, max_n = TWO_DIM_MAX_CAPACITY
 	else:
@@ -52,9 +52,9 @@ def create_data(n, d, k, Random):
 	if Random:
 		n = random.randint(int(max_n / 2), max_n)
 		k = random.randint(int(max_k / 2), max_k)
-
+	K = k
 	X, centers = make_blobs(n_samples=n, n_features=d, centers=k)
-	return k, X, centers
+	return n, K, X, centers
 
 
 def print_max_capacity():
@@ -86,7 +86,7 @@ def main(k, n, Random):
 
 	d = random.randint(2, 3)
 	print("d = ", d)  # TODO - remove
-	K, X, centers = create_data(n, d, k, Random)  # this returned K is the one that was used in the data generation
+	n, K, X, centers = create_data(n, d, k, Random)  # this returned K is the one that was used in the data generation
 
 	files.build_data_text_file(X, centers)
 
