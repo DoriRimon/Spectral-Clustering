@@ -1,6 +1,11 @@
 import numpy as np
 import math
 
+import os
+import sys
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from error import Error
+
 """
 Desc:   This file handles all the work related to computing the Lnorm matrix.
 """
@@ -40,6 +45,11 @@ def D_matrix(W):
 
 	"""
 	D = W.sum(axis=1)
+
+	for d in D:
+		if d == 0:
+			Error('Division By Zero', __file__)
+
 	D_half = [1 / math.sqrt(d) for d in D]
 	return D_half
 

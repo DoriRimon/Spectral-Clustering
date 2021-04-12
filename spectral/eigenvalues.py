@@ -1,9 +1,15 @@
 import numpy as np
 
+import os
+import sys
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from error import Error
+
 """
 Desc:   This file handles all the work related to computing the eigenvalues and eigenvectors
 		of the Lnorm matrix.
 """
+
 
 def QR(A):
 	"""
@@ -23,8 +29,7 @@ def QR(A):
 		Norm[i] = np.linalg.norm(U[:, i])
 
 		if Norm[i] == 0:
-			print('Exit on division by zero')
-			exit()
+			Error('Division By Zero', __file__)
 
 		Q[:, i] = U[:, i] / Norm[i]
 		R[i][i + 1:n] = Q[:, i].dot(U[:, i + 1:n])
@@ -57,4 +62,3 @@ def QR_Iterations(A, epsilon=0.0001):
 		Qbar = Qbar.dot(Q)
 
 	return Abar, Qbar
-

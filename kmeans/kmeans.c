@@ -15,8 +15,9 @@ static PyObject* kmeans();
 
 static int k, N, d, MAX_ITER;
 
-/* --------------- Memory Stuff --------------- */
+/* --------------- Memory Handling --------------- */
 
+/* Allocate a matrix of ints */
 static int** allocate_imatrix(int rows, int cols) {
     int i;
     int **matrix = calloc(rows, sizeof(int*));
@@ -28,6 +29,7 @@ static int** allocate_imatrix(int rows, int cols) {
     return matrix;
 }
 
+/* Deallocate a matrix of ints */
 static void deallocate_imatrix(int** matrix, int rows)
 {
     int i;
@@ -38,6 +40,7 @@ static void deallocate_imatrix(int** matrix, int rows)
     free(matrix);
 }
 
+/* Allocate a matrix of doubles */
 static double** allocate_dmatrix(int rows, int cols) {
     int i;
     double **matrix = calloc(rows, sizeof(double*));
@@ -49,6 +52,7 @@ static double** allocate_dmatrix(int rows, int cols) {
     return matrix;
 }
 
+/* Deallocate a matrix of doubles */
 static void deallocate_dmatrix(double** matrix, int rows)
 {
     int i;
@@ -59,6 +63,7 @@ static void deallocate_dmatrix(double** matrix, int rows)
     free(matrix);
 }
 
+/* Copy the values from the vector v to the vector u */
 static void vector_dassign(double *u, double *v, int size) {
     int i;
     for (i=0; i<size; i++) {
@@ -66,6 +71,7 @@ static void vector_dassign(double *u, double *v, int size) {
     }
 }
 
+/* The main function of the code */
 static PyObject* m(double** obs, double** cents, int** cltrs) {
     double **observations = obs;
     double **centroids = cents;
@@ -73,8 +79,10 @@ static PyObject* m(double** obs, double** cents, int** cltrs) {
     PyObject* res, *temp;
     Py_ssize_t i, j;
 
+    /* cluster */
     clustering(observations, clusters, centroids);
 
+    /* build the result python list from observations*/
     res = PyList_New(N);
     for (i = 0; i < N; i++) {
         temp = PyList_New(d+1);
@@ -92,18 +100,19 @@ static PyObject* m(double** obs, double** cents, int** cltrs) {
     return res;
 }
 
+/* Initialize the centroids from the given init_centroids indexes */
 static void initialize(int* init_centroids, double** centroids, double** observations, int** clusters)
 {
     int i;
     for (i = 0; i < k; i++) {
         int index = init_centroids[i];
-        /* printf("index = %i\n", index); */
         clusters[i][index] = 1;
         vector_dassign(centroids[i], observations[index], d);
         centroids[i][d] = i;
     }
 }
 
+/* Update centroids to be the mean value of the cluster, as described in the kmeans algorithm */
 static void update_centroids(double **centroids, double** observations) {
     int i;
     double **sum = allocate_dmatrix(k, d);
@@ -132,6 +141,8 @@ static void update_centroids(double **centroids, double** observations) {
     free(counter);
 }
 
+/* Assign observation i to cluster val */
+/* Also removes observation from the previous cluster (prev) */
 static void clusters_assignments(int i, int prev, int val, double **observations, int **clusters) {
     observations[i][d] = val;
     if(prev >= 0)
@@ -141,6 +152,7 @@ static void clusters_assignments(int i, int prev, int val, double **observations
     clusters[val][i] = 1;
 }
 
+/* The main clustering algorithm */
 static void clustering(double **observations, int **clusters, double **centroids) {
     int iter = 0;
     int flag = 0;
@@ -173,6 +185,7 @@ static void clustering(double **observations, int **clusters, double **centroids
     }
 }
 
+/* Calculate the norm of two vectors */
 static double norm(double *v1, double *v2, int length) {
     double sum = 0;
     int i;
@@ -182,7 +195,7 @@ static double norm(double *v1, double *v2, int length) {
     return sum;
 }
 
-/* --------------- Python Stuff --------------- */
+/* --------------- Python Handling --------------- */
 
 /*
     input: double** observations, int* centroids, int k, int N, int d, int MAX_ITER
