@@ -56,7 +56,7 @@ def create_data(n, d, k, Random):
 		k = random.randint(int(max_k / 2), max_k)
 
 	X, centers = make_blobs(n_samples=n, n_features=d, centers=k)
-	return k, X, centers
+	return n, k, X, centers
 
 
 def print_max_capacity():
@@ -88,7 +88,7 @@ def main(k, n, Random):
 
 	d = random.randint(2, 3)
 	print("d = ", d)  # TODO - remove
-	K, X, centers = create_data(n, d, k, Random)  # this returned K is the one that was used in the data generation
+	n, K, X, centers = create_data(n, d, k, Random)  # this returned K is the one that was used in the data generation
 
 	files.build_data_text_file(X, centers)
 
