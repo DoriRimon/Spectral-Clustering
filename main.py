@@ -1,7 +1,6 @@
-import spectral
+from spectral import spectral
 import random
 from sklearn.datasets import make_blobs
-import os
 import files
 
 """
@@ -81,7 +80,7 @@ def main(k, n, Random):
 
 	"""
 	# import is done here inorder to prevent calling the kmeans module (from tasks.py) before build.
-	import kmeans
+	from kmeans import kmeans
 
 	k, n = int(k), int(n)
 	print_max_capacity()

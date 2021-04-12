@@ -1,5 +1,4 @@
-import laplacian
-import eigenvalues
+from spectral import laplacian, eigenvalues
 import numpy as np
 import math
 
