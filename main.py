@@ -25,6 +25,8 @@ Note:   Throughout the documentation we used names that were defined in the assi
 # TODO - maybe create folder structure?
 # TODO - no need in global X, centers
 # TODO - create function for converting list of ints to str
+# TODO - error in kmeans.py when running on Random mode
+# TODO - graphs colors problem (all clusters in the same color)
 
 # TODO - find actual (K, n) of the maximum capacity
 
@@ -43,7 +45,7 @@ def create_data(n, d, k, Random):
 	:return: TODO
 
 	"""
-	max_k, max_n = 0, 0
+
 	if d == 2:
 		max_k, max_n = TWO_DIM_MAX_CAPACITY
 	else:
@@ -52,9 +54,9 @@ def create_data(n, d, k, Random):
 	if Random:
 		n = random.randint(int(max_n / 2), max_n)
 		k = random.randint(int(max_k / 2), max_k)
-	K = k
+
 	X, centers = make_blobs(n_samples=n, n_features=d, centers=k)
-	return n, K, X, centers
+	return n, k, X, centers
 
 
 def print_max_capacity():
