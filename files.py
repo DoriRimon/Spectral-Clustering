@@ -107,8 +107,8 @@ def build_clusters_pdf_file(K, k, n, d, spectral_res, kmeans_res, centers):
 	if d == 2:
 		# fig, (ax1, ax2) = plt.subplots(1, 2)
 		fig = plt.figure(figsize=(10, 10))
-		ax1 = fig.add_subplot(1, 2, 1, projection='2d')
-		ax2 = fig.add_subplot(1, 2, 2, projection='2d')
+		ax1 = fig.add_subplot(1, 2, 1)
+		ax2 = fig.add_subplot(1, 2, 2)
 	elif d == 3:
 		fig = plt.figure(figsize=(10, 10))
 		ax1 = fig.add_subplot(1, 2, 1, projection='3d')
@@ -118,6 +118,8 @@ def build_clusters_pdf_file(K, k, n, d, spectral_res, kmeans_res, centers):
 		ax1.scatter(*coordinates, color=colors[int(kmeans_res[i][d])])
 		ax1.set_title('K-means')
 		ax2.scatter(*coordinates, color=colors[int(spectral_res[i][k])])
+		ax1.set_ylim([25, 50])
+		ax2.set_ylim([25, 50])
 		ax2.set_title('Normalized Spectral Clustering')
 		s = f'Data was generated from the values:\nn = {n}'f', k = {K}\n' \
 		    f'The k that was used for both algorithms was {k}\n' \
