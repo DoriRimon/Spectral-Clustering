@@ -103,12 +103,12 @@ def build_clusters_pdf_file(K, k, n, d, spectral_res, kmeans_res, centers):
 	if d == 2:
 		# fig, (ax1, ax2) = plt.subplots(1, 2)
 		fig = plt.figure(figsize=(10, 10))
-		ax1 = fig.add_subplot(1, 2, 1)
-		ax2 = fig.add_subplot(1, 2, 2)
+		ax1 = fig.add_subplot(2, 2, 1)
+		ax2 = fig.add_subplot(2, 2, 2)
 	elif d == 3:
 		fig = plt.figure(figsize=(10, 10))
-		ax1 = fig.add_subplot(1, 2, 1, projection='3d')
-		ax2 = fig.add_subplot(1, 2, 2, projection='3d')
+		ax1 = fig.add_subplot(2, 2, 1, projection='3d')
+		ax2 = fig.add_subplot(2, 2, 2, projection='3d')
 	for i in range(n):
 		coordinates = [kmeans_res[i][k] for k in range(d)]
 		ax1.scatter(*coordinates, color=colors[int(kmeans_res[i][d])])
