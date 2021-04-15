@@ -1,8 +1,12 @@
-import spectral
+from spectral import spectral
 import random
 from sklearn.datasets import make_blobs
-import os
 import files
+
+import os
+import sys
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from error import Error
 
 """
 Desc:   This is the main file - the glue of the program
@@ -12,21 +16,6 @@ Note:   Throughout the documentation we used names that were defined in the assi
 		The goal was to make the documentation easy to understand and coherent with the
 		assignment.
 """
-
-# TODO - error handling
-# TODO - edge values
-# TODO - move bottlenecks to C
-# TODO - remove unrelated imports
-# TODO - remove debug code
-# TODO - remove unnecessary prints
-# TODO - check all the shapes in the documentation
-# TODO - document C code properly
-# TODO - maybe create output module?
-# TODO - maybe create folder structure?
-# TODO - no need in global X, centers
-# TODO - create function for converting list of ints to str
-# TODO - error in kmeans.py when running on Random mode
-# TODO - graphs colors problem (all clusters in the same color)
 
 # TODO - find actual (K, n) of the maximum capacity
 
@@ -81,9 +70,13 @@ def main(k, n, Random):
 
 	"""
 	# import is done here inorder to prevent calling the kmeans module (from tasks.py) before build.
-	import kmeans
+	from kmeans import kmeans
 
 	k, n = int(k), int(n)
+
+	if k >= n:
+		Error('k >= n', __file__)
+
 	print_max_capacity()
 
 	d = random.randint(2, 3)

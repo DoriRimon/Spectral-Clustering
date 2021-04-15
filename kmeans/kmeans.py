@@ -3,8 +3,6 @@ import mykmeanssp as mk
 
 """
 Desc:   This is the main file regarding the kmeans algorithm.
-
-Ret:    
 """
 
 
@@ -65,7 +63,8 @@ def main(X, k, n, d):
 	:param k: int, amount of clusters
 	:param n: int, amount of observations
 	:param d: int, dimension of each observation
-	:return: TODO
+	:return: list, shape(n, d+1) - the observations. At the end of each
+			observation (at index d) the cluster of the observation appears.
 
 	"""
 	global observations

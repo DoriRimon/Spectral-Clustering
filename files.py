@@ -1,9 +1,12 @@
 import os
 import matplotlib.pyplot as plt
-from mpl_toolkits import mplot3d
 import matplotlib
 import numpy as np
 from math import comb
+
+"""
+Desc:   This file handles all the work related to the output files of the program
+"""
 
 
 def remove_file(filename):

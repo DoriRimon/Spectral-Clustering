@@ -1,7 +1,11 @@
-import laplacian
-import eigenvalues
+from spectral import laplacian, eigenvalues
 import numpy as np
 import math
+
+import os
+import sys
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from error import Error
 
 """
 Desc:   This is the main file regarding the spectral clustering algorithm.
@@ -13,7 +17,7 @@ Note:   This code doesn't handle the part that sends the vectors of T to kmeans.
 """
 
 
-def eigengap(eigen_values):  # TODO - max and index will probably be slow
+def eigengap(eigen_values):
 	"""
 	The Eigengap Heuristic as described in the assignment
 
@@ -68,6 +72,11 @@ def T_matrix(U):
 	"""
 	n = U.shape[0]
 	k = U.shape[1]
+
+	for i in range(n):
+		if np.linalg.norm(U[i]) == 0:
+			Error('Division By Zero', __file__)
+
 	T = [[U[i][j] / np.linalg.norm(U[i]) for j in range(k)] for i in range(n)]
 	return np.array(T)
 

@@ -10,7 +10,7 @@ Desc:   This is the tasks file as described in the assignment
 
 @task
 def build(c):
-    c.run("python3.8.5 setup.py build_ext --inplace")
+    c.run("python3.8.5 kmeans/setup.py build_ext --inplace")
     print("Done building", flush=True)
 
 
