@@ -105,9 +105,12 @@ def build_clusters_pdf_file(K, k, n, d, spectral_res, kmeans_res, centers):
 	colors = [cmap(i) for i in np.linspace(0, 1, k)]
 	(ax1, ax2) = (None, None)
 	if d == 2:
-		fig, (ax1, ax2) = plt.subplots(1, 2)
+		# fig, (ax1, ax2) = plt.subplots(1, 2)
+		fig = plt.figure(figsize=(10, 10))
+		ax1 = fig.add_subplot(1, 2, 1, projection='2d')
+		ax2 = fig.add_subplot(1, 2, 2, projection='2d')
 	elif d == 3:
-		fig = plt.figure()
+		fig = plt.figure(figsize=(10, 10))
 		ax1 = fig.add_subplot(1, 2, 1, projection='3d')
 		ax2 = fig.add_subplot(1, 2, 2, projection='3d')
 	for i in range(n):
