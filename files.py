@@ -75,7 +75,7 @@ def jaccard(data, result, k):
 
 	counter = 0
 	for i in range(n):
-		for j in range(i+1, n):
+		for j in range(i + 1, n):
 			if data_hash[i] == data_hash[j] and result_hash[i] == result_hash[j]:
 				counter += 1
 
@@ -95,27 +95,30 @@ def build_clusters_pdf_file(K, k, n, d, spectral_res, kmeans_res, centers):
 	"""
 
 	remove_file("clusters.pdf")
-	jaccard_spectral = jaccard(centers,spectral_res,k)
-	jaccard_kmeans = jaccard(centers,kmeans_res,k)
+	jaccard_spectral = jaccard(centers, spectral_res, k)
+	jaccard_kmeans = jaccard(centers, kmeans_res, k)
 	print("Jaccard measure for Spectral Clustering: ", jaccard_spectral)
 	print("Jaccard measure for Kmeans: ", jaccard_kmeans)
 
 	fig = None
 	cmap = matplotlib.cm.get_cmap('brg')
 	colors = [cmap(i) for i in np.linspace(0, 1, k)]
-	(ax1,ax2) = (None,None)
+	(ax1, ax2) = (None, None)
 	if d == 2:
-		fig, (ax1,ax2) = plt.subplots(1,2)
+		fig, (ax1, ax2) = plt.subplots(1, 2)
 	elif d == 3:
-		fig= plt.figure()
-		ax1 = fig.add_subplot(1,2,1,projection='3d')
-		ax2 = fig.add_subplot(1,2,2,projection='3d')
+		fig = plt.figure()
+		ax1 = fig.add_subplot(1, 2, 1, projection='3d')
+		ax2 = fig.add_subplot(1, 2, 2, projection='3d')
 	for i in range(n):
 		coordinates = [kmeans_res[i][k] for k in range(d)]
 		ax1.scatter(*coordinates, color=colors[int(kmeans_res[i][d])])
 		ax1.set_title('K-means')
 		ax2.scatter(*coordinates, color=colors[int(spectral_res[i][k])])
 		ax2.set_title('Normalized Spectral Clustering')
-		s = "Data was generated from the values: \n" + "n = " + str(n) + "k = " + str(k) + "\n", "The Jaccard measure for Spectral Clusetering: " + str(jaccard_spectral) + "The jaccard measure for K-means: " + str(jaccard_kmeans)
-		fig.text(0.1,0.15,s)
+		s = f'Data was generated from the values:\nn = {n}'f', k = {K}\n' \
+		    f'The k that was used for both algorithms was {k}\n' \
+		    f'The Jaccard measure for Spectral Clustering: {jaccard_spectral}\n' \
+		    f'The Jaccard measure for K-means: {jaccard_kmeans}'
+		fig.text(0.1, 0.15, s)
 	plt.savefig("clusters.pdf")
