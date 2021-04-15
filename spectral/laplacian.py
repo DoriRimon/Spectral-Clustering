@@ -50,7 +50,7 @@ def D_matrix(W):
 	D = W.sum(axis=1)
 
 	for d in D:
-		if abs(d) < consts.EPSILON:
+		if d == 0:
 			Error('Division By Zero', __file__)
 
 	D_half = [1 / math.sqrt(d) for d in D]

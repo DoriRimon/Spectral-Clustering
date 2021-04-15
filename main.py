@@ -23,6 +23,7 @@ Note:   Throughout the documentation we used names that were defined in the assi
 # TODO - handle situation where k or n were not given
 # TODO - fix jaccard computation
 # TODO - finish clusters.pdf creation
+# TODO - error handling in C
 
 TWO_DIM_MAX_CAPACITY = (5, 100)  # Our (K, n) of the maximum capacity for 2 dimensional vectors
 THREE_DIM_MAX_CAPACITY = (10, 200)  # Our (K, n) of the maximum capacity for 3 dimensional vectors

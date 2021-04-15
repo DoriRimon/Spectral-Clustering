@@ -31,7 +31,7 @@ def QR(A):
 	for i in range(n):
 		Norm[i] = np.linalg.norm(U[:, i])
 
-		if abs(Norm[i]) < consts.EPSILON:
+		if Norm[i] == 0:
 			Error('Division By Zero', __file__)
 
 		Q[:, i] = U[:, i] / Norm[i]

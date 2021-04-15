@@ -77,7 +77,7 @@ def T_matrix(U):
 	k = U.shape[1]
 
 	for i in range(n):
-		if abs(np.linalg.norm(U[i])) < consts.EPSILON:
+		if np.linalg.norm(U[i]) == 0:
 			Error('Division By Zero', __file__)
 
 	T = [[U[i][j] / np.linalg.norm(U[i]) for j in range(k)] for i in range(n)]
