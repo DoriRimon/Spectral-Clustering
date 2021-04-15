@@ -120,5 +120,5 @@ def build_clusters_pdf_file(K, k, n, d, spectral_res, kmeans_res, centers):
 		    f'The k that was used for both algorithms was {k}\n' \
 		    f'The Jaccard measure for Spectral Clustering: {jaccard_spectral}\n' \
 		    f'The Jaccard measure for K-means: {jaccard_kmeans}'
-		fig.text(0.1, 0.15, s)
+		fig.text(0.5, 0.4, s, ha='center', fontsize='16')
 	plt.savefig("clusters.pdf")
