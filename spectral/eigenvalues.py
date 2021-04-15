@@ -1,9 +1,12 @@
 import numpy as np
 
+# This code adds the root directory to the path
 import os
 import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 from error import Error
+import consts
 
 """
 Desc:   This file handles all the work related to computing the eigenvalues and eigenvectors
@@ -28,7 +31,7 @@ def QR(A):
 	for i in range(n):
 		Norm[i] = np.linalg.norm(U[:, i])
 
-		if Norm[i] == 0:
+		if abs(Norm[i]) < consts.EPSILON:
 			Error('Division By Zero', __file__)
 
 		Q[:, i] = U[:, i] / Norm[i]
@@ -39,7 +42,7 @@ def QR(A):
 	return Q, R
 
 
-def QR_Iterations(A, epsilon=0.0001):
+def QR_Iterations(A, epsilon=consts.EPSILON):
 	"""
 	The QR Iteration algorithm as defined in the assignment
 

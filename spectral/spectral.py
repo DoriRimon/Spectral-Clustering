@@ -2,10 +2,13 @@ from spectral import laplacian, eigenvalues
 import numpy as np
 import math
 
+# This code adds the root directory to the path
 import os
 import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 from error import Error
+import consts
 
 """
 Desc:   This is the main file regarding the spectral clustering algorithm.
@@ -74,7 +77,7 @@ def T_matrix(U):
 	k = U.shape[1]
 
 	for i in range(n):
-		if np.linalg.norm(U[i]) == 0:
+		if abs(np.linalg.norm(U[i])) < consts.EPSILON:
 			Error('Division By Zero', __file__)
 
 	T = [[U[i][j] / np.linalg.norm(U[i]) for j in range(k)] for i in range(n)]

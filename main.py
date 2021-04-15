@@ -3,9 +3,11 @@ import random
 from sklearn.datasets import make_blobs
 import files
 
+# This code adds the root directory to the path
 import os
 import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 from error import Error
 
 """
@@ -18,6 +20,9 @@ Note:   Throughout the documentation we used names that were defined in the assi
 """
 
 # TODO - find actual (K, n) of the maximum capacity
+# TODO - handle situation where k or n were not given
+# TODO - fix jaccard computation
+# TODO - finish clusters.pdf creation
 
 TWO_DIM_MAX_CAPACITY = (5, 100)  # Our (K, n) of the maximum capacity for 2 dimensional vectors
 THREE_DIM_MAX_CAPACITY = (10, 200)  # Our (K, n) of the maximum capacity for 3 dimensional vectors
