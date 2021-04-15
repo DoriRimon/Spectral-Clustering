@@ -95,19 +95,27 @@ def build_clusters_pdf_file(K, k, n, d, spectral_res, kmeans_res, centers):
 	"""
 
 	remove_file("clusters.pdf")
-	print("Jaccard measure for Spectral Clustering: ", jaccard(centers, spectral_res, k))
-	print("Jaccard measure for Kmeans: ", jaccard(centers, kmeans_res, k))
+	jaccard_spectral = jaccard(centers,spectral_res,k)
+	jaccard_kmeans = jaccard(centers,kmeans_res,k)
+	print("Jaccard measure for Spectral Clustering: ", jaccard_spectral)
+	print("Jaccard measure for Kmeans: ", jaccard_kmeans)
 
-	fig = plt.figure()
+	fig = None
 	cmap = matplotlib.cm.get_cmap('brg')
 	colors = [cmap(i) for i in np.linspace(0, 1, k)]
-	ax = None
+	(ax1,ax2) = (None,None)
 	if d == 2:
-		ax = fig.add_subplot()
+		fig, (ax1,ax2) = plt.subplots(1,2)
 	elif d == 3:
-		ax = fig.add_subplot(projection='3d')
-
+		fig= plt.figure()
+		ax1 = fig.add_subplot(1,2,1,projection='3d')
+		ax2 = fig.add_subplot(1,2,2,projection='3d')
 	for i in range(n):
-		coordinates = [spectral_res[i][k] for k in range(d)]
-		ax.scatter(*coordinates, color=colors[int(spectral_res[i][k])])
+		coordinates = [kmeans_res[i][k] for k in range(d)]
+		ax1.scatter(*coordinates, color=colors[int(kmeans_res[i][d])])
+		ax1.set_title('K-means')
+		ax2.scatter(*coordinates, color=colors[int(spectral_res[i][k])])
+		ax2.set_title('Normalized Spectral Clustering')
+		s = "Data was generated from the values: \n" + "n = " + str(n) + "k = " + str(k) + "\n", "The Jaccard measure for Spectral Clusetering: " + str(jaccard_spectral) + "The jaccard measure for K-means: " + str(jaccard_kmeans)
+		fig.text(0.1,0.15,s)
 	plt.savefig("clusters.pdf")
