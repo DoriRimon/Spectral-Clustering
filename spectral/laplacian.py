@@ -1,10 +1,13 @@
 import numpy as np
 import math
 
+# This code adds the root directory to the path
 import os
 import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 from error import Error
+import consts
 
 """
 Desc:   This file handles all the work related to computing the Lnorm matrix.
@@ -47,7 +50,7 @@ def D_matrix(W):
 	D = W.sum(axis=1)
 
 	for d in D:
-		if d == 0:
+		if abs(d) < consts.EPSILON:
 			Error('Division By Zero', __file__)
 
 	D_half = [1 / math.sqrt(d) for d in D]
