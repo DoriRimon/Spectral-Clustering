@@ -56,13 +56,12 @@ def build_clusters_text_file(k, spectral_res, kmeans_res):
 			clusters.write(','.join([str(num) for num in kmeans_indexes[i]]) + '\n')
 
 
-def jaccard(data, result, k):
+def jaccard(data, result):
 	"""
 	Computes the Jaccard Measure as defined in the assignment
 
 	:param data: array like, shape(n, ) - the data centers
 	:param result: matrix, shape(n, d+1) - the clustered observations
-	:param k: int, amount of clusters
 	:return: 0 <= float <= 1, the jaccard measure
 
 	"""
@@ -74,17 +73,14 @@ def jaccard(data, result, k):
 		result_hash[i] = result_i
 
 	counter = 0
+	divider = 0
 	for i in range(n):
 		for j in range(i + 1, n):
-			if data_hash[i] == data_hash[j] and result_hash[i] == result_hash[j]:
+			if data_hash[i] == data_hash[j] == result_hash[i] == result_hash[j]:
 				counter += 1
+			if data_hash[i] == data_hash[j] or result_hash[i] == result_hash[j]:
+				divider += 1
 
-	result_clusters = {i: 0 for i in range(k)}
-	for i in range(n):
-		spectral_i = int(result[i][-1])
-		result_clusters[spectral_i] += 1
-
-	divider = sum(comb(amount, 2) for amount in result_clusters.values())
 	return counter / divider
 
 
@@ -95,8 +91,8 @@ def build_clusters_pdf_file(K, k, n, d, spectral_res, kmeans_res, centers):
 	"""
 
 	remove_file("clusters.pdf")
-	jaccard_spectral = jaccard(centers, spectral_res, k)
-	jaccard_kmeans = jaccard(centers, kmeans_res, k)
+	jaccard_spectral = jaccard(centers, spectral_res)
+	jaccard_kmeans = jaccard(centers, kmeans_res)
 	print("Jaccard measure for Spectral Clustering: ", jaccard_spectral)
 	print("Jaccard measure for Kmeans: ", jaccard_kmeans)
 
@@ -118,8 +114,6 @@ def build_clusters_pdf_file(K, k, n, d, spectral_res, kmeans_res, centers):
 		ax1.scatter(*coordinates, color=colors[int(kmeans_res[i][d])])
 		ax1.set_title('K-means')
 		ax2.scatter(*coordinates, color=colors[int(spectral_res[i][k])])
-		ax1.set_ylim([25, 50])
-		ax2.set_ylim([25, 50])
 		ax2.set_title('Normalized Spectral Clustering')
 		s = f'Data was generated from the values:\nn = {n}'f', k = {K}\n' \
 		    f'The k that was used for both algorithms was {k}\n' \
