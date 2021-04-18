@@ -115,9 +115,9 @@ def build_clusters_pdf_file(K, k, n, d, spectral_res, kmeans_res, centers):
 		ax1.set_title('K-means')
 		ax2.scatter(*coordinates, color=colors[int(spectral_res[i][k])])
 		ax2.set_title('Normalized Spectral Clustering')
-		s = f'Data was generated from the values:\nn = {n}, k = {K}\n \
-		    The k that was used for both algorithms was {k}\n \
-		    The Jaccard measure for Spectral Clustering: {jaccard_spectral}\n \
-		    The Jaccard measure for K-means: {jaccard_kmeans}'
+		s = f'Data was generated from the values:\nn = {n}'f', k = {K}\n' \
+		    f'The k that was used for both algorithms was {k}\n' \
+		    f'The Jaccard measure for Spectral Clustering: {jaccard_spectral}\n' \
+		    f'The Jaccard measure for K-means: {jaccard_kmeans}'
 		fig.text(0.5, 0.3, s, ha='center', fontsize='16')
 	plt.savefig("clusters.pdf")
