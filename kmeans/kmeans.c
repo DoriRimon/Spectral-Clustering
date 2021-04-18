@@ -27,6 +27,7 @@ static void error_handling(const char *error) {
     printf("%s", res);
     exit(1);
 }
+
 /* --------------- Memory Handling --------------- */
 
 /* Allocate a matrix of ints */
@@ -238,6 +239,7 @@ static PyObject* kmeans(PyObject *self, PyObject *args) {
     double** centroids;
     int** clusters;
 
+    error_handling("Hellooo");
     if(!PyArg_ParseTuple(args, "O:kmeans", &_list)) {
         return NULL;
     }
