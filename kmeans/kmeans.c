@@ -24,7 +24,7 @@ static void error_handling(const char *error) {
     strcat(res, error);
     strcat(res, "\nPath:      ./kmeans/kmeans.c");
 
-    printf(res);
+    printf("%s", res);
     exit(1);
 }
 /* --------------- Memory Handling --------------- */
