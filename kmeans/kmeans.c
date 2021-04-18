@@ -20,9 +20,9 @@ static int k, N, d, MAX_ITER;
 static void error_handling(const char *error) {
     char res[200];
     strcpy(res, "---------- || Please notice! || ----------\nAn error was caught:\n");
-    strcat(res, "Error:     ")
-    strcat(res, error)
-    strcat(res, "\nPath:      ./kmeans/kmeans.c")
+    strcat(res, "Error:     ");
+    strcat(res, error);
+    strcat(res, "\nPath:      ./kmeans/kmeans.c");
 
     printf(res);
     exit(1);
