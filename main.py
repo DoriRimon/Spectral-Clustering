@@ -75,7 +75,8 @@ def main(k, n, Random):
 	if not Random and (k is None or n is None):
 		Error('Unable to determine k, n', __file__)
 
-	k, n = int(k), int(n)
+	if (k is not None) and (n is not None):
+		k, n = int(k), int(n)
 
 	if k >= n:
 		Error('k >= n', __file__)
