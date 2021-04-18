@@ -8,7 +8,6 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from error import Error
-import consts
 
 """
 Desc:   This is the main file regarding the spectral clustering algorithm.
@@ -87,7 +86,7 @@ def main(X, k=None):
 	"""
 	The main function of the spectral algorithm code
 
-	:param X: observations, shape(n, )
+	:param X: observations, shape(n, d)
 	:param k: int, amount of centroids
 	:return:    The T matrix (vectors that will be transferred to C), and
 				the computed k value

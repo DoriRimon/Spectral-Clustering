@@ -19,14 +19,9 @@ Note:   Throughout the documentation we used names that were defined in the assi
 		assignment.
 """
 
-# TODO - find actual (K, n) of the maximum capacity
-# TODO - handle situation where k or n were not given
-# TODO - fix jaccard computation
-# TODO - finish clusters.pdf creation
-# TODO - error handling in C
 
-TWO_DIM_MAX_CAPACITY = (5, 100)  # Our (K, n) of the maximum capacity for 2 dimensional vectors
-THREE_DIM_MAX_CAPACITY = (10, 200)  # Our (K, n) of the maximum capacity for 3 dimensional vectors
+TWO_DIM_MAX_CAPACITY = (20, 450)  # Our (K, n) of the maximum capacity for 2 dimensional vectors
+THREE_DIM_MAX_CAPACITY = (20, 450)  # Our (K, n) of the maximum capacity for 3 dimensional vectors
 
 def create_data(n, d, k, Random):
 	"""
@@ -36,7 +31,7 @@ def create_data(n, d, k, Random):
 	:param d: int, dimension of each point
 	:param k: int , amount of centers
 	:param Random: boolean, the Random variable described in the assignment
-	:return: TODO
+	:return: n, K (that may have been changed due to Random=True), X, centers
 
 	"""
 
@@ -77,6 +72,9 @@ def main(k, n, Random):
 	# import is done here inorder to prevent calling the kmeans module (from tasks.py) before build.
 	from kmeans import kmeans
 
+	if not Random and (k is None or n is None):
+		Error('Unable to determine k, n', __file__)
+
 	k, n = int(k), int(n)
 
 	if k >= n:
@@ -85,8 +83,11 @@ def main(k, n, Random):
 	print_max_capacity()
 
 	d = random.randint(2, 3)
-	print("d = ", d)  # TODO - remove
 	n, K, X, centers = create_data(n, d, k, Random)  # this returned K is the one that was used in the data generation
+
+	print(f'The k that was used (K) to create the data is {K}')
+	print(f'The n that was used to create the data is {n}')
+	print(f'The d that was used to create the data is {d}')
 
 	files.build_data_text_file(X, centers)
 
@@ -98,7 +99,7 @@ def main(k, n, Random):
 	Note:   The if else section here is needed because
 	        --> if Random=True, k should be computed by the
 	            eigengap heuristic, and that k will be of use in the following code.
-	        --> else, the actual k is needed in the when computing U in the spectral module.
+	        --> else, the actual k is needed when computing U in the spectral module.
 	"""
 	if Random:
 		spectral_observations, k = spectral.main(X)

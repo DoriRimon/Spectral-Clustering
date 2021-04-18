@@ -2,7 +2,6 @@ import os
 import matplotlib.pyplot as plt
 import matplotlib
 import numpy as np
-from math import comb
 
 """
 Desc:   This file handles all the work related to the output files of the program
@@ -74,9 +73,10 @@ def jaccard(data, result):
 
 	counter = 0
 	divider = 0
+
 	for i in range(n):
 		for j in range(i + 1, n):
-			if data_hash[i] == data_hash[j] == result_hash[i] == result_hash[j]:
+			if data_hash[i] == data_hash[j] and result_hash[i] == result_hash[j]:
 				counter += 1
 			if data_hash[i] == data_hash[j] or result_hash[i] == result_hash[j]:
 				divider += 1
@@ -115,9 +115,9 @@ def build_clusters_pdf_file(K, k, n, d, spectral_res, kmeans_res, centers):
 		ax1.set_title('K-means')
 		ax2.scatter(*coordinates, color=colors[int(spectral_res[i][k])])
 		ax2.set_title('Normalized Spectral Clustering')
-		s = f'Data was generated from the values:\nn = {n}'f', k = {K}\n' \
-		    f'The k that was used for both algorithms was {k}\n' \
-		    f'The Jaccard measure for Spectral Clustering: {jaccard_spectral}\n' \
-		    f'The Jaccard measure for K-means: {jaccard_kmeans}'
+		s = f'Data was generated from the values:\nn = {n}'f', k = {K}\n \
+		    The k that was used for both algorithms was {k}\n \
+		    The Jaccard measure for Spectral Clustering: {jaccard_spectral}\n \
+		    The Jaccard measure for K-means: {jaccard_kmeans}'
 		fig.text(0.5, 0.3, s, ha='center', fontsize='16')
 	plt.savefig("clusters.pdf")

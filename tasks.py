@@ -4,8 +4,6 @@ from main import main
 # TODO - remove time import and code
 import time
 
-# TODO - document
-
 """
 Desc:   This is the tasks file as described in the assignment
 """
@@ -13,42 +11,61 @@ Desc:   This is the tasks file as described in the assignment
 
 @task
 def build(c):
+	"""
+	Builds the C module
+
+	:param c: context
+
+	"""
 	c.run("python3.8.5 kmeans/setup.py build_ext --inplace")
-	print("Done building", flush=True)
+	print("Done building the kmeans module", flush=True)
 
 
 @task
-def run(c, k, n, Random=True):
+def run(c, k=None, n=None, Random=True):
+	"""
+	Run Forrest run
+
+	:param c: context
+	:param k: int
+	:param n: int
+	:param Random: boolean
+
+	"""
 	build(c)
 	main(k, n, Random)
 
 
+"""
+This code was done for testing
+"""
 @task
-def test_max_capacity(c, first_n='200', first_k='5', n_step='10', k_step='1', n_time_limit='275', k_time_limit='300',
-                      T='5'):
+def test_max_capacity(c, first_n='400', k='5', n_limit='600', time_limit='275', T='5', eps='10'):
 	build(c)
-	max_k = 0
 	max_n = 0
-	first_n, first_k, n_step, k_step, n_time_limit, k_time_limit, T = list(
-		map(int, first_n, first_k, n_step, k_step, n_time_limit, k_time_limit, T))
+	first_n, k, n_limit, time_limit, T, eps = list(
+		map(int, first_n, k, n_limit, time_limit, T, eps))
+	original_first = first_n
+	original_limit = n_limit
 	for t in range(T):
-		n = first_n - n_step
-		k = first_k - k_step
+		first_n = original_first
+		n_limit = original_limit
+		n = (first_n + n_limit) // 2
 		t = 0
-		while t < n_time_limit:
-			n += n_step
+		while abs(t - time_limit) > eps:
+			n = (first_n + n_limit) // 2
 			t = 0
 			start_time = time.time()
 			main(k, n, False)
 			t = time.time() - start_time
-		while t < k_time_limit:
-			k += k_step
-			t = 0
-			start_time = time.time()
-			main(k, n, False)
-			t = time.time() - start_time
-		max_k += k
+			if t > time_limit:
+				n_limit = n
+			else:
+				first_n = n
+
+			if n_limit - first_n == 1:
+				break
 		max_n += n
-	max_k /= T
+
 	max_n /= T
-	print(f'max k: {max_k}, max n: {max_n}')
+	print(f'max n: {max_n}')

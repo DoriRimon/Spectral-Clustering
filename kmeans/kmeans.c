@@ -2,8 +2,9 @@
 #include <Python.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <assert.h>
+#include <string.h>
 
+static void error_handling();
 static double norm();
 static void initialize();
 static void clusters_assignments();
@@ -15,16 +16,32 @@ static PyObject* kmeans();
 
 static int k, N, d, MAX_ITER;
 
+/* --------------- Error Handling --------------- */
+static void error_handling(const char *error) {
+    char res[200];
+    strcpy(res, "---------- || Please notice! || ----------\nAn error was caught:\n");
+    strcat(res, "Error:     ")
+    strcat(res, error)
+    strcat(res, "\nPath:      ./kmeans/kmeans.c")
+
+    printf(res);
+    exit(1);
+}
 /* --------------- Memory Handling --------------- */
 
 /* Allocate a matrix of ints */
 static int** allocate_imatrix(int rows, int cols) {
     int i;
     int **matrix = calloc(rows, sizeof(int*));
-    assert(matrix);
+
+    if (matrix == NULL) {
+        error_handling("Memory allocation failed");
+    }
     for (i = 0; i < rows; i++) {
         matrix[i] = calloc(cols, sizeof(int));
-        assert(matrix[i]);
+        if (matrix[i] == NULL) {
+            error_handling("Memory allocation failed");
+        }
     }
     return matrix;
 }
@@ -44,10 +61,14 @@ static void deallocate_imatrix(int** matrix, int rows)
 static double** allocate_dmatrix(int rows, int cols) {
     int i;
     double **matrix = calloc(rows, sizeof(double*));
-    assert(matrix);
+    if (matrix == NULL) {
+        error_handling("Memory allocation failed");
+    }
     for (i = 0; i < rows; i++) {
         matrix[i] = calloc(cols, sizeof(double));
-        assert(matrix[i]);
+        if (matrix[i] == NULL) {
+            error_handling("Memory allocation failed");
+        }
     }
     return matrix;
 }
@@ -118,7 +139,9 @@ static void update_centroids(double **centroids, double** observations) {
     double **sum = allocate_dmatrix(k, d);
     int r;
     int *counter = (int *)calloc(k, sizeof(int));
-    assert(sum);
+    if (sum == NULL) {
+        error_handling("Memory allocation failed");
+    }
 
     for (i = 0; i < N; i++)
     {
@@ -133,6 +156,9 @@ static void update_centroids(double **centroids, double** observations) {
     for (i = 0; i < k; i++)
     {
         for (r = 0; r < d; r++) {
+            if (counter[i] == 0) {
+                error_handling("Division By Zero");
+            }
             sum[i][r] /= counter[i];
         }
         vector_dassign(centroids[i], sum[i], d);

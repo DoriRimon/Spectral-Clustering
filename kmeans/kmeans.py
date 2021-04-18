@@ -1,12 +1,10 @@
 import numpy as np
 import mykmeanssp as mk
+import consts
 
 """
 Desc:   This is the main file regarding the kmeans algorithm.
 """
-
-
-MAX_ITER = 300
 
 observations = []
 clusters = []
@@ -63,11 +61,11 @@ def main(X, k, n, d):
 	:param k: int, amount of clusters
 	:param n: int, amount of observations
 	:param d: int, dimension of each observation
-	:return: list, shape(n, d+1) - the observations. At the end of each
-			observation (at index d) the cluster of the observation appears.
+	:return: list, shape(n, d+1) - the observations. The element at the end of each
+			observation (at index d) is the cluster of the observation.
 
 	"""
 	global observations
 	observations = X
 	k_means_pp(k, n)
-	return mk.kmeans([observations.tolist(), centroids, k, n, d, MAX_ITER])
+	return mk.kmeans([observations.tolist(), centroids, k, n, d, consts.MAX_ITER])
