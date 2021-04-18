@@ -22,7 +22,7 @@ static void error_handling(const char *error) {
     strcpy(res, "---------- || Please notice! || ----------\nAn error was caught:\n");
     strcat(res, "Error:     ");
     strcat(res, error);
-    strcat(res, "\nPath:      ./kmeans/kmeans.c");
+    strcat(res, "\nPath:      ./kmeans/kmeans.c\n");
 
     printf("%s", res);
     exit(1);
@@ -239,7 +239,6 @@ static PyObject* kmeans(PyObject *self, PyObject *args) {
     double** centroids;
     int** clusters;
 
-    error_handling("Hellooo");
     if(!PyArg_ParseTuple(args, "O:kmeans", &_list)) {
         return NULL;
     }
