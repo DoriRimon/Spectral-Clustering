@@ -77,9 +77,8 @@ def main(k, n, Random):
 
 	if (k is not None) and (n is not None):
 		k, n = int(k), int(n)
-
-	if k >= n:
-		Error('k >= n', __file__)
+		if k >= n:
+			Error('k >= n', __file__)
 
 	print_max_capacity()
 
