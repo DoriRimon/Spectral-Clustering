@@ -1,5 +1,5 @@
 from invoke import task
-from main import main
+import main
 import cProfile
 
 """
@@ -32,4 +32,4 @@ def run(c, k=None, n=None, Random=True):
 	"""
 	build(c)
 	# main(k, n, Random)
-	cProfile.run('main(k, n, Random)')
+	cProfile.run('main.main(k, n, Random)')
