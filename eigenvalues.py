@@ -1,10 +1,4 @@
 import numpy as np
-
-# This code adds the root directory to the path
-import os
-import sys
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
 from error import Error
 import consts
 

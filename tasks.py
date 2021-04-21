@@ -14,7 +14,7 @@ def build(c):
 	:param c: context
 
 	"""
-	c.run("python3.8.5 kmeans/setup.py build_ext --inplace")
+	c.run("python3.8.5 setup.py build_ext --inplace")
 	print("Done building the kmeans module", flush=True)
 
 

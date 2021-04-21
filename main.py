@@ -1,13 +1,7 @@
-from spectral import spectral
+import spectral
 import random
 from sklearn.datasets import make_blobs
 import files
-
-# This code adds the root directory to the path
-import os
-import sys
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
 from error import Error
 
 """
@@ -70,7 +64,7 @@ def main(k, n, Random):
 
 	"""
 	# import is done here inorder to prevent calling the kmeans module (from tasks.py) before build.
-	from kmeans import kmeans
+	import kmeans
 
 	if not Random and (k is None or n is None):
 		Error('Unable to determine k, n', __file__)

@@ -1,12 +1,7 @@
-from spectral import laplacian, eigenvalues
+import eigenvalues
+import laplacian
 import numpy as np
 import math
-
-# This code adds the root directory to the path
-import os
-import sys
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
 from error import Error
 
 """
