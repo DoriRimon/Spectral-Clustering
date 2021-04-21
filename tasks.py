@@ -1,6 +1,5 @@
 from invoke import task
-import main
-import cProfile
+from main import main
 
 """
 Desc:   This is the tasks file as described in the assignment
@@ -31,5 +30,5 @@ def run(c, k=None, n=None, Random=True):
 
 	"""
 	build(c)
-	# main(k, n, Random)
-	cProfile.run('main.main(k, n, Random)')
+	import cProfile
+	cProfile.runctx('main(k, n, Random)', {}, {'k': k, 'n': n, 'Random': Random})
