@@ -30,5 +30,13 @@ def run(c, k=None, n=None, Random=True):
 
 	"""
 	build(c)
-	import cProfile
-	cProfile.runctx('main(k, n, Random)', {}, {'k': k, 'n': n, 'Random': Random})
+
+	import cProfile, pstats, sys
+	pr = cProfile.Profile()
+	pr.enable()
+
+	main(k, n, Random)
+
+	pr.disable()
+	ps = pstats.Stats(pr, stream=sys.stdout)
+	ps.print_stats()
