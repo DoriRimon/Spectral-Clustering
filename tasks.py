@@ -30,14 +30,4 @@ def run(c, k=None, n=None, Random=True):
 
 	"""
 	build(c)
-
-	import cProfile, pstats, sys
-	pr = cProfile.Profile()
-	pr.enable()
-
 	main(k, n, Random)
-
-	pr.disable()
-	sortby = pstats.SortKey.TIME
-	ps = pstats.Stats(pr, stream=sys.stdout).sort_stats(sortby)
-	ps.print_stats()

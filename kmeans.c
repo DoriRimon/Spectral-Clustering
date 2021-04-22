@@ -226,6 +226,8 @@ static double norm(double *v1, double *v2, int length) {
 
 /*
     input: double** observations, int* centroids, int k, int N, int d, int MAX_ITER
+    output: double**, shape(n, d+1) - Matrix of observations, where at the last index of each
+    observation is the cluster index
 */
 static PyObject* kmeans(PyObject *self, PyObject *args) {
 

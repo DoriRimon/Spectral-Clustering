@@ -14,8 +14,8 @@ Note:   Throughout the documentation we used names that were defined in the assi
 """
 
 
-TWO_DIM_MAX_CAPACITY = (20, 450)  # Our (K, n) of the maximum capacity for 2 dimensional vectors
-THREE_DIM_MAX_CAPACITY = (20, 450)  # Our (K, n) of the maximum capacity for 3 dimensional vectors
+TWO_DIM_MAX_CAPACITY = (20, 310)  # Our (K, n) of the maximum capacity for 2 dimensional vectors
+THREE_DIM_MAX_CAPACITY = (20, 320)  # Our (K, n) of the maximum capacity for 3 dimensional vectors
 
 def create_data(n, d, k, Random):
 	"""
