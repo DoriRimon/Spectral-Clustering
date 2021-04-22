@@ -39,4 +39,5 @@ def run(c, k=None, n=None, Random=True):
 
 	pr.disable()
 	ps = pstats.Stats(pr, stream=sys.stdout)
+	ps.sort_stats('tottime')
 	ps.print_stats()
