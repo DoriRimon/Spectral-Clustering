@@ -1,5 +1,7 @@
 # Spectral-Clustering
 An implementation of the Spectral Clustering algorithm.
+This is the final project of the 0368-2161-07 Software Project course.
+The idea is to implement an extremely fast implemantation of the Spectral Clustering algorithm, using the C language to implement bottle-neck computations, the Python language to implement the main logic, and the CPython capabilities to combine the two
 
 ## Credits
 [1] Andrew Ng, Michael Jordan, and Yair Weiss. On spectral clustering: Analysis and an algorithm. Advances in neural information processing systems, 14:849-856, 2001. <br>
